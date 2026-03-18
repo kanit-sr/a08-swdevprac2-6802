@@ -26,21 +26,27 @@ export default function Banner() {
   };
 
   return (
-    <div className={styles.banner} onClick={handleBannerClick}>
-      <Image
-        src={bannerImages[currentImageIndex]}
-        alt="Venue banner background"
-        fill
-        style={{ objectFit: "cover" }}
-        priority
-      />
-      <div className={styles.overlay} />
-      <div className={styles.content}>
-        <h1 className={styles.tagline}>where every event finds its venue</h1>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap');
+      `}</style>
+
+      <div className={styles.banner} onClick={handleBannerClick}>
+        <Image
+          src={bannerImages[currentImageIndex]}
+          alt="Venue banner background"
+          fill
+          style={{ objectFit: "cover" }}
+          priority
+        />
+        <div className={styles.overlay} />
+        <div className={styles.content}>
+          <h1 className={styles.tagline}>where every event finds its venue</h1>
+        </div>
+        <button className={styles.selectVenueButton} onClick={handleSelectVenueClick}>
+          Select Venue
+        </button>
       </div>
-      <button className={styles.selectVenueButton} onClick={handleSelectVenueClick}>
-        Select Venue
-      </button>
-    </div>
+    </>
   );
 }

@@ -1,5 +1,4 @@
 .banner {
-  /* ต้องเป็น relative เพื่อให้ Image fill และ overlay วางทับได้ */
   position: relative;
   width: 100%;
   height: 500px;
@@ -8,81 +7,93 @@
 }
 
 .overlay {
-  /* วางทับรูปเต็มพื้นที่ด้วยสีโปร่งใส เพื่อให้ข้อความอ่านง่ายขึ้น */
   position: absolute;
-  inset: 0; /* shorthand สำหรับ top:0 right:0 bottom:0 left:0 */
-  background-color: #21193e99; /* #37353E + 60% opacity */
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 25, 60, 0.45) 0%,
+    rgba(10, 25, 60, 0.72) 100%
+  );
   z-index: 1;
 }
 
 .content {
-  /* วางข้อความไว้เหนือ overlay (z-index > overlay) และกึ่งกลางจอ */
   position: absolute;
   inset: 0;
   z-index: 2;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem;
 }
 
 .tagline {
-  color: #d3dad9;
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  color: #EDF5FF;
+  font-size: 2.75rem;
+  font-weight: 600;
   text-align: center;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   text-transform: lowercase;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
+  text-shadow: 0 2px 24px rgba(10, 25, 60, 0.4);
+  line-height: 1.25;
 }
 
 .selectVenueButton {
   position: absolute;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
   z-index: 3;
-  border: none;
+  border: 1px solid rgba(150, 200, 255, 0.4);
   border-radius: 9999px;
-  background-color: #f8f2de;
-  color: #3d3220;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.55rem 1.1rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  background: rgba(100, 160, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #EDF5FF;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  box-shadow: 0 4px 20px rgba(10, 25, 60, 0.25);
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .selectVenueButton:hover {
-  background-color: #fff2cc;
+  background: rgba(100, 160, 255, 0.32);
+  border-color: rgba(150, 200, 255, 0.7);
 }
 
 /* ---- Responsive ---- */
 
-/* Mobile: จอเล็กกว่า 640px */
 @media (max-width: 640px) {
   .banner {
     height: 260px;
   }
 
   .tagline {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     letter-spacing: 0.02em;
   }
 
   .selectVenueButton {
     right: 0.8rem;
     bottom: 0.8rem;
-    font-size: 0.85rem;
-    padding: 0.45rem 0.9rem;
+    font-size: 0.78rem;
+    padding: 0.45rem 1rem;
   }
 }
 
-/* Tablet: 641px – 1024px */
 @media (min-width: 641px) and (max-width: 1024px) {
   .banner {
     height: 380px;
   }
 
   .tagline {
-    font-size: 2rem;
+    font-size: 2.1rem;
   }
 }
