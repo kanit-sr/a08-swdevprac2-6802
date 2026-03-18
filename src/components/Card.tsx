@@ -10,16 +10,18 @@ interface CardProps {
   venueName?: string;
   imgSrc?: string;
   href?: string;
-  onRatingChange?: (newRating: number) => void;
+  rating?: number;
+  onRatingChange?: (rating: number) => void;
 }
 
 export default function Card({
   venueName = "The Bloom Pavilion",
   imgSrc = "/img/bloom.jpg",
   href,
+  rating: initialRating,
   onRatingChange,
 }: CardProps) {
-  const [rating, setRating] = useState<number | null>(0);
+  const [rating, setRating] = useState<number | null>(initialRating ?? 0);
 
   return (
     <InteractiveCard>
@@ -33,23 +35,31 @@ export default function Card({
             draggable={false}
           />
         </div>
+
         <div className="p-4 pb-2">
-          <h2 className="text-lg font-semibold text-gray-800">{venueName}</h2>
+          <h2 className="text-lg font-semibold text-gray-800">
+            {venueName}
+          </h2>
+
+          {initialRating !== undefined && <div>{rating}</div>}
         </div>
       </Link>
-      <div className="px-4 pb-4">
-        <Rating
-          id={`${venueName} Rating`}
-          name={`${venueName} Rating`}
-          data-testid={`${venueName} Rating`}
-          value={rating}
-          onChange={(_, newValue) => {
-            const nextRating = newValue ?? 0;
-            setRating(nextRating);
-            onRatingChange?.(nextRating);
-          }}
-        />
-      </div>
+
+      {initialRating !== undefined && (
+        <div className="px-4 pb-4">
+          <Rating
+            id={`${venueName} Rating`}
+            name={`${venueName} Rating`}
+            data-testid={`${venueName} Rating`}
+            value={rating}
+            onChange={(_, newValue) => {
+              const nextRating = newValue ?? 0;
+              setRating(nextRating);
+              onRatingChange?.(nextRating);
+            }}
+          />
+        </div>
+      )}
     </InteractiveCard>
   );
 }

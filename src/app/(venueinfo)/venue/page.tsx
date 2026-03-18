@@ -1,9 +1,14 @@
-import CardPanel from "@/components/CardPanel";
+import VenueCatalog from "@/components/VenueCatalog";
+import getVenues from "@/libs/getVenues";
 
-export default function VenuePage() {
+export const dynamic = "force-dynamic";
+
+export default async function VenuePage() {
+  const venues = getVenues();
+
   return (
     <main>
-      <CardPanel />
+      <VenueCatalog venuesJson={venues} />
     </main>
   );
 }
